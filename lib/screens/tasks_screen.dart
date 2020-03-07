@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_todo_provider/models/task_manager.dart';
+import 'package:flutter_todo_provider/widgets/tasks_list.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -51,7 +52,7 @@ class TaskScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     Text(
-                      '14 Tasks',
+                      "${Provider.of<TaskManager>(context).tasksCount} Task(s)",
                       style: GoogleFonts.roboto(
                         textStyle:
                             TextStyle(color: Colors.white, fontSize: 25.0),
@@ -77,18 +78,11 @@ class TaskScreen extends StatelessWidget {
           Expanded(
             child: ClipPath(
               child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 17.0, vertical: 20.0),
                 width: MediaQuery.of(context).size.width,
                 color: Colors.white,
                 child: Consumer<TaskManager>(builder: (context, tasks, child) {
-                  return ListView(
-                    children: <Widget>[
-                      ListTile(
-                        title: Text('Buy smthing'),
-                        trailing:
-                            Checkbox(value: false, onChanged: (bool b) {}),
-                      )
-                    ],
-                  );
+                  return TasksList();
                 }),
               ),
               clipper: WaveClipperTwo(reverse: true),
